@@ -1,50 +1,80 @@
 import { useRouter } from "next/router";
-
-
-const url = 'https://test-task-api-optimo.herokuapp.com';
+import { URL } from "../../config";
 
 const employeeById = ({ employeeData }) => {
-    // const router = useRouter();
-    // const { employeeById } = router.query;
-    console.log(employeeData);
+  // const router = useRouter();
+  // const { employeeById } = router.query;
+  let jobPosition = employeeData.jobs.find(
+    (job) => job.id === employeeData.employeeInfo.job_id
+  );
+  let location = employeeData.locations.find(
+    (location) => location.id === employeeData.employeeInfo.location_id
+  );
 
-    return (<div>
-        <h1> Hello {employeeData.name} </h1>
-        <div className="card" style={{ width: "30rem", background: "green" }}>
-            <img src={`${url + employeeData.avatar}`} className="card-img-top" alt="employee-avatar" />
-            <div className="card-body">
-                <h5 className="card-title">{employeeData.name}</h5>
-                <p className="card-text">{employeeData.description}</p>
-                <p className="card-text">{employeeData.position}</p>
-                <p className="card-text">{employeeData.liked} 👍</p>
-            </div>
+  console.log(employeeData);
+  console.log("location:", jobPosition);
+  return (
+    <div className="d-grid justify-content-center">
+      <h1> Hello {employeeData.employeeInfo.name} </h1>
+      <div className="card bg-primary w-100">
+        <img
+          src={`${URL + employeeData.employeeInfo.avatar}`}
+          className="card-img-top"
+          alt="employee-avatar"
+        />
+        <div className="card-body">
+          <h5 className="card-title">{employeeData.employeeInfo.name}</h5>
+          <p className="card-text">{employeeData.employeeInfo.position}</p>
+          <p className="card-text">{employeeData.employeeInfo.description}</p>
+          <p className="card-text">{jobPosition.name}</p>
+          <p className="card-text">{location.name}</p>
+          <h2 className="card-text">
+            {employeeData.employeeInfo.liked}{" "}
+            <i className="fa-solid fa-thumbs-up text-warning "></i>
+          </h2>
         </div>
-
+      </div>
     </div>
-    )
-}
+  );
+};
 
 export async function getStaticPaths() {
-    const res = await fetch(url + '/employee')
-    const users = await res.json()
+  const res = await fetch(URL + "/employee");
+  const users = await res.json();
 
-    const paths = users.map((user) => ({
-        params: { employeeById: user.id.toString() },
-    }))
+  const paths = users.map((user) => ({
+    params: { employeeById: user.id.toString() },
+  }));
 
-    return { paths, fallback: false }
+  return { paths, fallback: false };
 }
-
 
 export const getStaticProps = async ({ params }) => {
-    let res = await fetch(url + `/employee/${params.employeeById}`);
-    let employee = await res.json();
+  return await Promise.all([
+    fetch(URL + `/employee/${params.employeeById}`),
+    fetch(URL + "/location"),
+    fetch(URL + "/job"),
+  ])
+    .then(async ([employee, location, job]) => {
+      const employeeInfo = await employee.json();
+      const locations = await location.json();
+      const jobs = await job.json();
 
-    return {
+      return {
         props: {
-            employeeData: employee
-        }
-    }
-}
+          employeeData: { employeeInfo, locations, jobs },
+        },
+      };
+    })
+    .catch((err) => {
+      alert("error: ", err);
+
+      return {
+        props: {
+          employeesData: [],
+        },
+      };
+    });
+};
 
 export default employeeById;
