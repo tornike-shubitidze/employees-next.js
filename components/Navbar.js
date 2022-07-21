@@ -1,5 +1,5 @@
 import Link from "next/link";
-import "bootstrap/dist/css/bootstrap.css";
+// import "bootstrap/dist/css/bootstrap.css";
 // import style from '../styles/Home.module.css'
 
 const Navbar = () => {

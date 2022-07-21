@@ -1,18 +1,32 @@
 import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 import { URL } from "../../config";
 
 const employeeById = ({ employeeData }) => {
   // const router = useRouter();
   // const { employeeById } = router.query;
+  let [likeCount, setLikeCount] = useState(employeeData.employeeInfo.liked);
+
   let jobPosition = employeeData.jobs.find(
     (job) => job.id === employeeData.employeeInfo.job_id
   );
+
   let location = employeeData.locations.find(
     (location) => location.id === employeeData.employeeInfo.location_id
   );
 
-  console.log(employeeData);
-  console.log("location:", jobPosition);
+  let giveLike = () => {
+    fetch(URL + `/employee/${employeeData.employeeInfo.id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ title: "Update Employee Like Amount" }),
+    })
+      .then((response) => response.json())
+      .then((data) => setLikeCount(data.liked));
+
+    // try& catch უნდა გაეწეროს
+  };
+
   return (
     <div className="d-grid justify-content-center">
       <h1> Hello {employeeData.employeeInfo.name} </h1>
@@ -28,10 +42,17 @@ const employeeById = ({ employeeData }) => {
           <p className="card-text">{employeeData.employeeInfo.description}</p>
           <p className="card-text">{jobPosition.name}</p>
           <p className="card-text">{location.name}</p>
-          <h2 className="card-text">
-            {employeeData.employeeInfo.liked}{" "}
-            <i className="fa-solid fa-thumbs-up text-warning "></i>
-          </h2>
+          <div className="d-flex align-items-center gap-2">
+            <span>Likes: </span>
+            <h4 className="card-text">{likeCount}</h4>
+          </div>
+          <button
+            type="button"
+            className="btn btn-info"
+            onClick={() => giveLike()}
+          >
+            Give Like <i className="fa-solid fa-thumbs-up text-warning " />
+          </button>
         </div>
       </div>
     </div>

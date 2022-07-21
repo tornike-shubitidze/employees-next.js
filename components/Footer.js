@@ -1,5 +1,3 @@
-import "bootstrap/dist/css/bootstrap.css";
-
 const Footer = () => {
   return (
     <div className="footer-basic border-top mt-3">
