@@ -1,4 +1,3 @@
-import styles from "../styles/Home.module.css";
 import { useForm } from "react-hook-form";
 import { URL } from "../config";
 
@@ -10,22 +9,26 @@ const feedBack = () => {
   } = useForm();
 
   let onSubmit = (data) => {
-    console.log(data);
-    // fetch(URL + `/feedback`, {
-    //   method: "POST",
-    //   headers: { "Content-Type": "application/json" },
-    //   body: JSON.stringify({ title: "Post Feedback" }),
-    // })
-    //   .then((response) => response.json())
-    //   .then((data) => setLikeCount(data.liked));
+    fetch(`${URL}/feedback`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    })
+      .then(async (response) => {
+        const res = await response.json();
+        alert("Thank You! Feedback sent Successfully.");
+      })
+      .catch((error) => {
+        alert("There was an error!", error);
+      });
   };
 
   return (
     <div
-      className={`d-flex justify-content-center ${styles.feedback}`}
+      className={`container d-flex justify-content-center `}
       onSubmit={handleSubmit(onSubmit)}
     >
-      <form className="d-block g-3 ">
+      <form className="d-block my-5 col-3">
         <div className="col-12 mb-4">
           <label className="form-label">Name</label>
           <input
@@ -33,6 +36,7 @@ const feedBack = () => {
               required: true,
               minLength: 1,
             })}
+            placeholder="Name"
             type="text"
             className={`form-control ${errors.name ? `is-invalid` : ""}`}
           />
@@ -50,6 +54,7 @@ const feedBack = () => {
                 /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/,
             })}
             type="email"
+            placeholder="email@example.com"
             className={`form-control ${errors.email ? `is-invalid` : ""} `}
           />
           {errors.email && (
@@ -65,6 +70,7 @@ const feedBack = () => {
               minLength: 1,
             })}
             type="text"
+            placeholder="Type Your Message..."
             className={`form-control ${errors.message ? `is-invalid` : ""}`}
           />
           {errors.message && (
@@ -72,7 +78,7 @@ const feedBack = () => {
           )}
         </div>
 
-        <button className="btn btn-primary mt-4" type="submit">
+        <button className="btn btn-primary mt-4 w-100" type="submit">
           Send
         </button>
       </form>

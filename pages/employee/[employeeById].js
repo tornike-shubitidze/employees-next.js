@@ -1,10 +1,7 @@
-import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { URL } from "../../config";
 
 const employeeById = ({ employeeData }) => {
-  // const router = useRouter();
-  // const { employeeById } = router.query;
   let [likeCount, setLikeCount] = useState(employeeData.employeeInfo.liked);
 
   let jobPosition = employeeData.jobs.find(
@@ -22,29 +19,53 @@ const employeeById = ({ employeeData }) => {
       body: JSON.stringify({ title: "Update Employee Like Amount" }),
     })
       .then((response) => response.json())
-      .then((data) => setLikeCount(data.liked));
-
-    // try& catch უნდა გაეწეროს
+      .then((data) => setLikeCount(data.liked))
+      .catch((error) => {
+        alert("There was an error!", error);
+      });
   };
 
+  console.log(employeeData.employeeInfo);
   return (
-    <div className="d-grid justify-content-center">
-      <h1> Hello {employeeData.employeeInfo.name} </h1>
-      <div className="card bg-primary w-100">
+    <div className="container d-flex justify-content-center my-5 col-lg-4">
+      <div className="card bg-primary col-lg-9">
         <img
           src={`${URL + employeeData.employeeInfo.avatar}`}
           className="card-img-top"
           alt="employee-avatar"
         />
         <div className="card-body">
-          <h5 className="card-title">{employeeData.employeeInfo.name}</h5>
-          <p className="card-text">{employeeData.employeeInfo.position}</p>
-          <p className="card-text">{employeeData.employeeInfo.description}</p>
-          <p className="card-text">{jobPosition.name}</p>
-          <p className="card-text">{location.name}</p>
-          <div className="d-flex align-items-center gap-2">
-            <span>Likes: </span>
-            <h4 className="card-text">{likeCount}</h4>
+          <div className="d-flex align-items-center gap-3 mb-2">
+            <span>
+              <b>Name: </b>
+            </span>
+            <h5 className="card-title m-0">{employeeData.employeeInfo.name}</h5>
+          </div>
+          <div className="d-flex align-items-center gap-3 mb-2">
+            <span>
+              <b>Position: </b>
+            </span>
+            <p className="card-text m-0">{jobPosition.name}</p>
+          </div>
+          <div className="d-flex align-items-center gap-3 mb-2">
+            <span>
+              <b>Description: </b>
+            </span>
+            <p className="card-text m-0">
+              {employeeData.employeeInfo.description}
+            </p>
+          </div>
+          <div className="d-flex align-items-center gap-3 mb-2">
+            <span>
+              <b>Location: </b>
+            </span>
+            <p className="card-text m-0">{location.name}</p>
+          </div>
+          <div className="d-flex align-items-center gap-3 mb-3">
+            <span>
+              <b>Likes: </b>
+            </span>
+            <h5 className="card-text m-0">{likeCount}</h5>
           </div>
           <button
             type="button"
@@ -60,7 +81,7 @@ const employeeById = ({ employeeData }) => {
 };
 
 export async function getStaticPaths() {
-  const res = await fetch(URL + "/employee");
+  const res = await fetch(`${URL}/employee`);
   const users = await res.json();
 
   const paths = users.map((user) => ({
@@ -72,9 +93,9 @@ export async function getStaticPaths() {
 
 export const getStaticProps = async ({ params }) => {
   return await Promise.all([
-    fetch(URL + `/employee/${params.employeeById}`),
-    fetch(URL + "/location"),
-    fetch(URL + "/job"),
+    fetch(`${URL}/employee/${params.employeeById}`),
+    fetch(`${URL}/location`),
+    fetch(`${URL}/job`),
   ])
     .then(async ([employee, location, job]) => {
       const employeeInfo = await employee.json();

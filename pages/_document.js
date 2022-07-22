@@ -6,6 +6,7 @@ class MyDocument extends Document {
       <Html>
         <Head>
           <title>Employees App</title>
+          <link rel="icon" type="image/x-icon" href="/logo.jpg"></link>
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <script
             src="https://kit.fontawesome.com/e6d6671b0b.js"

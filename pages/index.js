@@ -1,15 +1,20 @@
-import Head from "next/head";
 import Image from "next/image";
-import styles from "../styles/Home.module.css";
 
 export default function Home() {
   return (
-    <div className={styles.container}>
-      <main className={styles.main}>
-        <div className={styles.logo_slogan}>
-          <Image src="/logo.jpg" alt="Vercel Logo" width={200} height={200} />
+    <div className="container justify-content-center position-relative vh-100">
+      <main className="justify-content-center text-center position-absolute top-50 start-50 translate-middle">
+        <h2>What happens here, stays here 😎 </h2>
+        <br />
+        <div className="justify-content-center ">
+          <Image
+            className="rounded"
+            src="/logo.jpg"
+            alt="Logo"
+            width={500}
+            height={500}
+          />
         </div>
-        <h1 className={styles.title}>What happens here, stays here </h1>
       </main>
     </div>
   );

@@ -39,11 +39,11 @@ const employees = ({ employeesData }) => {
       : dataByLocation;
 
   return (
-    <div className="d-grid justify-content-center my-5">
-      <div className="d-flex mb-5 justify-content-between">
-        <div className="dropdown">
+    <div className="container d-block">
+      <div className="d-flex justify-content-center mt-3">
+        <div className="dropdown me-5 ">
           <button
-            className="btn btn-secondary dropdown-toggle"
+            className="btn btn-primary dropdown-toggle"
             onClick={() => setlocationDropdownIsOpen(!locationDropdownIsOpen)}
             type="button"
             id="dropdownMenu2"
@@ -58,11 +58,19 @@ const employees = ({ employeesData }) => {
             } `}
             aria-labelledby="dropdownMenuButton1"
           >
-            <li onClick={() => setLocationDropdown({})} key={1111111}>
+            <li
+              className="dropdown-item"
+              onClick={() => setLocationDropdown({})}
+              key={1111111}
+            >
               Remove Filter
             </li>
             {employeesData.locations.map((location, i) => (
-              <li onClick={() => setLocationDropdown(location)} key={i}>
+              <li
+                className="dropdown-item"
+                onClick={() => setLocationDropdown(location)}
+                key={i}
+              >
                 {location.name}
               </li>
             ))}
@@ -70,14 +78,14 @@ const employees = ({ employeesData }) => {
         </div>
         <div className="dropdown">
           <button
-            className="btn btn-secondary dropdown-toggle"
+            className="btn btn-primary dropdown-toggle"
             onClick={() => setPositionDropdownIsOpen(!positionDropdownIsOpen)}
             type="button"
             id="dropdownMenu2"
             data-bs-toggle="dropdown"
             aria-expanded="false"
           >
-            {position.name ? position.name : "Position By Location"}
+            {position.name ? position.name : "Filter By Position"}
           </button>
           <ul
             className={`dropdown-menu list-group d-${
@@ -85,61 +93,72 @@ const employees = ({ employeesData }) => {
             }`}
             aria-labelledby="dropdownMenuButton1"
           >
-            <li onClick={() => setPositionDropdown({})} key={2222222}>
+            <li
+              className="dropdown-item"
+              onClick={() => setPositionDropdown({})}
+              key={2222222}
+            >
               Remove Filter
             </li>
             {employeesData.jobs.map((job, i) => (
-              <li onClick={() => setPositionDropdown(job)} key={i}>
+              <li
+                className="dropdown-item"
+                onClick={() => setPositionDropdown(job)}
+                key={i}
+              >
                 {job.name}
               </li>
             ))}
           </ul>
         </div>
       </div>
-      <br />
-      <br />
-      <br />
-      {dataByPosition.map((employee, i) => {
-        return (
-          <div
-            className={`card mb-3 bg-${
-              i == 0
-                ? "primary"
-                : i == 1
-                ? "success"
-                : i == 2
-                ? "warning"
-                : "white"
-            }`}
-            key={employee.id}
-          >
-            <img
-              src={`${URL + employee.avatar}`}
-              className="card-img-top"
-              alt="employee-avatar"
-            />
-            <div className="card-body">
-              <h5 className="card-title">{employee.name}</h5>
-              <p className="card-text">{employee.description}</p>
-              <p className="card-text">{employee.position}</p>
-              <p className="card-text">
-                {employee.liked}
-                <i className="fa-solid fa-thumbs-up text-warning fa-2x ms-2"></i>
-              </p>
-              <Link href={`/employee/${employee.id}`}>View Profile</Link>
-            </div>
-          </div>
-        );
-      })}
+      <div className=" justify-content-between mt-5">
+        <div className="row justify-content-around">
+          {dataByPosition.map((employee, i) => {
+            return (
+              <div
+                className={`card mb-5 me-1 bg-${
+                  i == 0
+                    ? "primary"
+                    : i == 1
+                    ? "success"
+                    : i == 2
+                    ? "info"
+                    : "white"
+                } w-25`}
+                key={employee.id}
+              >
+                <img
+                  src={`${URL + employee.avatar}`}
+                  className="card-img-top"
+                  alt="employee-avatar"
+                />
+                <div className="card-body">
+                  <h5 className="card-title">{employee.name}</h5>
+                  <p className="card-text">{employee.description}</p>
+                  <p className="card-text">{employee.position}</p>
+                  <p className="card-text">
+                    {employee.liked}
+                    <i className="fa-solid fa-thumbs-up text-warning fa-2x ms-2"></i>
+                  </p>
+                  <Link href={`/employee/${employee.id}`}>
+                    <a className="btn btn-danger">View Profile</a>
+                  </Link>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
     </div>
   );
 };
 
 export const getStaticProps = async () => {
   return await Promise.all([
-    fetch(URL + "/employee"),
-    fetch(URL + "/location"),
-    fetch(URL + "/job"),
+    fetch(`${URL}/employee`),
+    fetch(`${URL}/location`),
+    fetch(`${URL}/job`),
   ])
     .then(async ([employee, location, job]) => {
       const employees = await employee.json();
