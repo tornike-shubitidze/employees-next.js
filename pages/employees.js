@@ -2,10 +2,6 @@ import { URL } from "../config";
 import Link from "next/link";
 import { useState } from "react";
 import { makeId } from "../config";
-import {
-  NotificationContainer,
-  NotificationManager,
-} from "react-notifications";
 
 const employees = ({ employeesData }) => {
   let [locationDropdownIsOpen, setlocationDropdownIsOpen] = useState(false);
@@ -118,7 +114,7 @@ const employees = ({ employeesData }) => {
         </div>
       </div>
 
-      <div className=" justify-content-between mt-5">
+      <div className="mt-5">
         <div className="row m-auto">
           {dataByPosition.map((employee, i) => {
             return (
@@ -158,7 +154,6 @@ const employees = ({ employeesData }) => {
           })}
         </div>
       </div>
-      <NotificationContainer />
     </div>
   );
 };
@@ -176,18 +171,12 @@ export const getStaticProps = async () => {
 
       return {
         props: {
-          employeesData: { employees, locations, jobs },
+          employeesData: { employees, locations, jobs, isLoaded: true },
         },
       };
     })
     .catch(() => {
-      NotificationManager.error("Something Went Wrong!", "Error", 3000);
-
-      return {
-        props: {
-          employeesData: [],
-        },
-      };
+      return { notFound: true };
     });
 };
 

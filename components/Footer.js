@@ -5,16 +5,16 @@ const Footer = () => {
     <div className="footer-basic border-top mt-3">
       <footer>
         <div className="container">
-          <div className="row justify-content-center">
-            <div className="col-sm-4 col-md-3 item">
+          <div className="row justify-content-center ">
+            <div className="col-4 col-md-3">
               <h3>Services</h3>
-              <ul className="list-inline">
-                <li className="list-block-item text-start px-0">
+              <ul className="list-inline ">
+                <li className="list-block-item text-start px-0 ">
                   <Link href={"/"}>
                     <a>Web design</a>
                   </Link>
                 </li>
-                <li className="list-block-item text-start px-0">
+                <li className="list-block-item text-start px-0 ">
                   <Link href={"/"}>
                     <a>Development</a>
                   </Link>
@@ -26,7 +26,7 @@ const Footer = () => {
                 </li>
               </ul>
             </div>
-            <div className="col-sm-4 col-md-3 item">
+            <div className="col-4 col-md-3 ">
               <h3>About</h3>
               <ul className="list-inline">
                 <li className="list-block-item text-start px-0">
@@ -46,7 +46,7 @@ const Footer = () => {
                 </li>
               </ul>
             </div>
-            <div className="col-sm-4 col-md-3 item">
+            <div className="col-4 col-md-3">
               <h3>Careers</h3>
               <ul className="list-inline">
                 <li className="list-block-item text-start px-0">
@@ -66,7 +66,7 @@ const Footer = () => {
                 </li>
               </ul>
             </div>
-            <div className="col-lg-3 item social">
+            <div className="d-flex justify-content-center col-lg-3 social pt-4 p-lg-0">
               <Link href={"/"}>
                 <a>
                   <i className="fa-brands fa-instagram-square"></i>

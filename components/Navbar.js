@@ -27,7 +27,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="d-flex flex-row sticky-top p-3 px-md-5 bg-dark text-white justify-content-md-between ">
+    <div className="d-flex flex-row sticky-top p-3 px-md-5 bg-dark text-white justify-content-md-between justify-content-center">
       <Link href={"/"}>
         <a className="my-auto d-none d-md-block">
           <img className="rounded" src="/logo.jpg" width={42} height={40} />

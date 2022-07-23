@@ -29,7 +29,6 @@ const employeeById = ({ employeeData }) => {
       });
   };
 
-  console.log(employeeData.employeeInfo);
   return (
     <div className="container d-flex justify-content-center my-5 col-lg-4">
       <div className="card bg-primary col-lg-9">
@@ -114,13 +113,7 @@ export const getStaticProps = async ({ params }) => {
       };
     })
     .catch(() => {
-      NotificationManager.error("Something Went Wrong!", "Error", 3000);
-
-      return {
-        props: {
-          employeesData: [],
-        },
-      };
+      return { notFound: true };
     });
 };
 
