@@ -28,8 +28,8 @@ const feedBack = () => {
       className={`container d-flex justify-content-center `}
       onSubmit={handleSubmit(onSubmit)}
     >
-      <form className="d-block my-5 col-3">
-        <div className="col-12 mb-4">
+      <form className="d-block my-5 col-lg-3 ">
+        <div className="col-12  mb-4">
           <label className="form-label">Name</label>
           <input
             {...register("name", {

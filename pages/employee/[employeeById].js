@@ -3,6 +3,8 @@ import { URL } from "../../config";
 
 const employeeById = ({ employeeData }) => {
   let [likeCount, setLikeCount] = useState(employeeData.employeeInfo.liked);
+  // let [employeeData, setEmployeeData] = useState({});
+  let [isLoaded, setIsLoaded] = useState(false);
 
   let jobPosition = employeeData.jobs.find(
     (job) => job.id === employeeData.employeeInfo.job_id
@@ -11,6 +13,34 @@ const employeeById = ({ employeeData }) => {
   let location = employeeData.locations.find(
     (location) => location.id === employeeData.employeeInfo.location_id
   );
+
+  // useEffect(() => {
+  //   return await Promise.all([
+  //     fetch(`${URL}/employee/${params.employeeById}`),
+  //     fetch(`${URL}/location`),
+  //     fetch(`${URL}/job`),
+  //   ])
+  //     .then(async ([employee, location, job]) => {
+  //       const employeeInfo = await employee.json();
+  //       const locations = await location.json();
+  //       const jobs = await job.json();
+
+  //       return {
+  //         props: {
+  //           employeeData: { employeeInfo, locations, jobs },
+  //         },
+  //       };
+  //     })
+  //     .catch((err) => {
+  //       alert("error: ", err);
+
+  //       return {
+  //         props: {
+  //           employeesData: [],
+  //         },
+  //       };
+  //     });
+  // });
 
   let giveLike = () => {
     fetch(URL + `/employee/${employeeData.employeeInfo.id}`, {
@@ -101,7 +131,6 @@ export const getStaticProps = async ({ params }) => {
       const employeeInfo = await employee.json();
       const locations = await location.json();
       const jobs = await job.json();
-
       return {
         props: {
           employeeData: { employeeInfo, locations, jobs },
@@ -110,7 +139,6 @@ export const getStaticProps = async ({ params }) => {
     })
     .catch((err) => {
       alert("error: ", err);
-
       return {
         props: {
           employeesData: [],

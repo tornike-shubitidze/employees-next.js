@@ -34,9 +34,9 @@ const Navbar = () => {
               <Link
                 href={
                   link.name === "Employees"
-                    ? "employees"
+                    ? "/employees"
                     : link.name === "Feedback"
-                    ? "feedback"
+                    ? "/feedback"
                     : "/"
                 }
               >

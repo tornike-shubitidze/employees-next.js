@@ -1,6 +1,7 @@
 import { URL } from "../config";
 import Link from "next/link";
 import { useState } from "react";
+import { makeId } from "../config";
 
 const employees = ({ employeesData }) => {
   let [locationDropdownIsOpen, setlocationDropdownIsOpen] = useState(false);
@@ -61,7 +62,7 @@ const employees = ({ employeesData }) => {
             <li
               className="dropdown-item"
               onClick={() => setLocationDropdown({})}
-              key={1111111}
+              key={makeId()}
             >
               Remove Filter
             </li>
@@ -96,7 +97,7 @@ const employees = ({ employeesData }) => {
             <li
               className="dropdown-item"
               onClick={() => setPositionDropdown({})}
-              key={2222222}
+              key={makeId()}
             >
               Remove Filter
             </li>
@@ -112,38 +113,41 @@ const employees = ({ employeesData }) => {
           </ul>
         </div>
       </div>
+
       <div className=" justify-content-between mt-5">
-        <div className="row justify-content-around">
+        <div className="row m-auto">
           {dataByPosition.map((employee, i) => {
             return (
-              <div
-                className={`card mb-5 me-1 bg-${
-                  i == 0
-                    ? "primary"
-                    : i == 1
-                    ? "success"
-                    : i == 2
-                    ? "info"
-                    : "white"
-                } w-25`}
-                key={employee.id}
-              >
-                <img
-                  src={`${URL + employee.avatar}`}
-                  className="card-img-top"
-                  alt="employee-avatar"
-                />
-                <div className="card-body">
-                  <h5 className="card-title">{employee.name}</h5>
-                  <p className="card-text">{employee.description}</p>
-                  <p className="card-text">{employee.position}</p>
-                  <p className="card-text">
-                    {employee.liked}
-                    <i className="fa-solid fa-thumbs-up text-warning fa-2x ms-2"></i>
-                  </p>
-                  <Link href={`/employee/${employee.id}`}>
-                    <a className="btn btn-danger">View Profile</a>
-                  </Link>
+              <div class="col-md-4 ">
+                <div
+                  className={`card mb-5 bg-${
+                    i == 0
+                      ? "primary"
+                      : i == 1
+                      ? "success"
+                      : i == 2
+                      ? "info"
+                      : "white"
+                  }`}
+                  key={employee.id}
+                >
+                  <img
+                    src={`${URL + employee.avatar}`}
+                    className="card-img-top"
+                    alt="employee-avatar"
+                  />
+                  <div className="card-body">
+                    <h5 className="card-title">{employee.name}</h5>
+                    <p className="card-text">{employee.description}</p>
+                    <p className="card-text">{employee.position}</p>
+                    <p className="card-text">
+                      {employee.liked}
+                      <i className="fa-solid fa-thumbs-up text-warning fa-2x ms-2"></i>
+                    </p>
+                    <Link href={`/employee/${employee.id}`}>
+                      <a className="btn btn-danger">View Profile</a>
+                    </Link>
+                  </div>
                 </div>
               </div>
             );
