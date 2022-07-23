@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/router";
-import Image from "next/image";
+import { makeId } from "../config";
 
 const Navbar = () => {
   let router = useRouter();
@@ -33,6 +33,7 @@ const Navbar = () => {
         {navLinks.map((link, i) => {
           return (
             <Link
+              key={makeId()}
               href={
                 link.name === "Employees"
                   ? "/employees"
