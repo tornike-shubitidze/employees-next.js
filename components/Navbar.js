@@ -27,8 +27,13 @@ const Navbar = () => {
   };
 
   return (
-    <div className="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-dark border-bottom box-shadow text-white justify-content-between">
-      <img className="rounded" src="/logo.jpg" width={42} height={40} />
+    <div className="d-flex flex-row sticky-top p-3 px-md-5 bg-dark text-white justify-content-md-between ">
+      <Link href={"/"}>
+        <a className="my-auto d-none d-md-block">
+          <img className="rounded" src="/logo.jpg" width={42} height={40} />
+        </a>
+      </Link>
+
       <nav className="my-2 my-md-0 mr-md-3">
         {navLinks.map((link, i) => {
           return (

@@ -48,7 +48,7 @@ const employees = ({ employeesData }) => {
       <div className="d-flex justify-content-center mt-3">
         <div className="dropdown me-5 ">
           <button
-            className="btn btn-primary dropdown-toggle"
+            className="btn btn-warning dropdown-toggle"
             onClick={() => setlocationDropdownIsOpen(!locationDropdownIsOpen)}
             type="button"
             id="dropdownMenu2"
@@ -83,7 +83,7 @@ const employees = ({ employeesData }) => {
         </div>
         <div className="dropdown">
           <button
-            className="btn btn-primary dropdown-toggle"
+            className="btn btn-warning dropdown-toggle"
             onClick={() => setPositionDropdownIsOpen(!positionDropdownIsOpen)}
             type="button"
             id="dropdownMenu2"

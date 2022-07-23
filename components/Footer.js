@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 const Footer = () => {
   return (
     <div className="footer-basic border-top mt-3">
@@ -8,13 +10,19 @@ const Footer = () => {
               <h3>Services</h3>
               <ul className="list-inline">
                 <li className="list-block-item text-start px-0">
-                  <a href="/">Web design</a>
+                  <Link href={"/"}>
+                    <a>Web design</a>
+                  </Link>
                 </li>
                 <li className="list-block-item text-start px-0">
-                  <a href="/">Development</a>
+                  <Link href={"/"}>
+                    <a>Development</a>
+                  </Link>
                 </li>
                 <li className="list-block-item text-start px-0">
-                  <a href="/">Hosting</a>
+                  <Link href={"/"}>
+                    <a>Hosting</a>
+                  </Link>
                 </li>
               </ul>
             </div>
@@ -22,13 +30,19 @@ const Footer = () => {
               <h3>About</h3>
               <ul className="list-inline">
                 <li className="list-block-item text-start px-0">
-                  <a href="/">Company</a>
+                  <Link href={"/"}>
+                    <a>Company</a>
+                  </Link>
                 </li>
                 <li className="list-block-item text-start px-0">
-                  <a href="/">Team</a>
+                  <Link href={"/"}>
+                    <a>Team</a>
+                  </Link>
                 </li>
                 <li className="list-block-item text-start px-0">
-                  <a href="/">Legacy</a>
+                  <Link href={"/"}>
+                    <a>Legacy</a>
+                  </Link>
                 </li>
               </ul>
             </div>
@@ -36,29 +50,43 @@ const Footer = () => {
               <h3>Careers</h3>
               <ul className="list-inline">
                 <li className="list-block-item text-start px-0">
-                  <a href="/">Job openings</a>
+                  <Link href={"/"}>
+                    <a>Job openings</a>
+                  </Link>
                 </li>
                 <li className="list-block-item text-start px-0">
-                  <a href="/">Employee success</a>
+                  <Link href={"/"}>
+                    <a>Employee success</a>
+                  </Link>
                 </li>
                 <li className="list-block-item text-start px-0">
-                  <a href="/">Benefits</a>
+                  <Link href={"/"}>
+                    <a>Benefits</a>
+                  </Link>
                 </li>
               </ul>
             </div>
             <div className="col-lg-3 item social">
-              <a href="/">
-                <i className="fa-brands fa-instagram-square"></i>
-              </a>
-              <a href="/">
-                <i className="fa-brands fa-snapchat-square"></i>
-              </a>
-              <a href="/">
-                <i className="fa-brands fa-twitter"></i>
-              </a>
-              <a href="/">
-                <i className="fa-brands fa-facebook"></i>
-              </a>
+              <Link href={"/"}>
+                <a>
+                  <i className="fa-brands fa-instagram-square"></i>
+                </a>
+              </Link>
+              <Link href={"/"}>
+                <a>
+                  <i className="fa-brands fa-snapchat-square"></i>
+                </a>
+              </Link>
+              <Link href={"/"}>
+                <a>
+                  <i className="fa-brands fa-twitter"></i>
+                </a>
+              </Link>
+              <Link href={"/"}>
+                <a>
+                  <i className="fa-brands fa-facebook"></i>
+                </a>
+              </Link>
             </div>
           </div>
         </div>
