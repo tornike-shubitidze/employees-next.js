@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/router";
+import Image from "next/image";
 
 const Navbar = () => {
   let router = useRouter();
@@ -26,31 +27,32 @@ const Navbar = () => {
   };
 
   return (
-    <div className="navbar bg-dark justify-content-center sticky-top">
-      <ul className="nav nav-pills my-4 ">
+    <div className="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-dark border-bottom box-shadow text-white justify-content-between">
+      <img className="rounded" src="/logo.jpg" width={42} height={40} />
+      <nav className="my-2 my-md-0 mr-md-3">
         {navLinks.map((link, i) => {
           return (
-            <li className="nav-item mx-3" key={i}>
-              <Link
-                href={
-                  link.name === "Employees"
-                    ? "/employees"
-                    : link.name === "Feedback"
-                    ? "/feedback"
-                    : "/"
-                }
+            <Link
+              href={
+                link.name === "Employees"
+                  ? "/employees"
+                  : link.name === "Feedback"
+                  ? "/feedback"
+                  : "/"
+              }
+            >
+              <a
+                className={`btn btn-${
+                  link.isActive ? "primary" : "white"
+                } text-white me-3`}
+                onClick={(e) => setActive(e)}
               >
-                <a
-                  className={`btn btn-${link.isActive ? "primary" : "warning"}`}
-                  onClick={(e) => setActive(e)}
-                >
-                  {link.name}
-                </a>
-              </Link>
-            </li>
+                {link.name}
+              </a>
+            </Link>
           );
         })}
-      </ul>
+      </nav>
     </div>
   );
 };
