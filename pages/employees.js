@@ -118,7 +118,7 @@ const employees = ({ employeesData }) => {
         <div className="row m-auto">
           {dataByPosition.map((employee, i) => {
             return (
-              <div class="col-md-4 ">
+              <div key={makeId()} className="col-md-4 ">
                 <div
                   className={`card mb-5 bg-${
                     i == 0
