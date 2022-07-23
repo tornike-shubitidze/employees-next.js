@@ -2,6 +2,10 @@ import { URL } from "../config";
 import Link from "next/link";
 import { useState } from "react";
 import { makeId } from "../config";
+import {
+  NotificationContainer,
+  NotificationManager,
+} from "react-notifications";
 
 const employees = ({ employeesData }) => {
   let [locationDropdownIsOpen, setlocationDropdownIsOpen] = useState(false);
@@ -154,6 +158,7 @@ const employees = ({ employeesData }) => {
           })}
         </div>
       </div>
+      <NotificationContainer />
     </div>
   );
 };
@@ -175,8 +180,8 @@ export const getStaticProps = async () => {
         },
       };
     })
-    .catch((err) => {
-      alert("error: ", err);
+    .catch(() => {
+      NotificationManager.error("Something Went Wrong!", "Error", 3000);
 
       return {
         props: {

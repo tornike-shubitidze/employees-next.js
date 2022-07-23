@@ -1,8 +1,8 @@
 import { useForm } from "react-hook-form";
 import { URL } from "../config";
 import {
-  NotificationContainer,
   NotificationManager,
+  NotificationContainer,
 } from "react-notifications";
 
 const feedBack = () => {
@@ -26,7 +26,7 @@ const feedBack = () => {
         );
       })
       .catch(() => {
-        NotificationManager.error("Message didn't send!", "Error", 3000);
+        NotificationManager.error("Message Didn't Send!", "Error", 3000);
       });
   };
 

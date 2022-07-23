@@ -1,5 +1,9 @@
 import { useState } from "react";
 import { URL } from "../../config";
+import {
+  NotificationManager,
+  NotificationContainer,
+} from "react-notifications";
 
 const employeeById = ({ employeeData }) => {
   let [likeCount, setLikeCount] = useState(employeeData.employeeInfo.liked);
@@ -20,8 +24,8 @@ const employeeById = ({ employeeData }) => {
     })
       .then((response) => response.json())
       .then((data) => setLikeCount(data.liked))
-      .catch((error) => {
-        alert("There was an error!", error);
+      .catch(() => {
+        NotificationManager.error("Something Went Wrong!", "Error", 3000);
       });
   };
 
@@ -76,6 +80,7 @@ const employeeById = ({ employeeData }) => {
           </button>
         </div>
       </div>
+      <NotificationContainer />
     </div>
   );
 };
@@ -108,8 +113,8 @@ export const getStaticProps = async ({ params }) => {
         },
       };
     })
-    .catch((err) => {
-      alert("error: ", err);
+    .catch(() => {
+      NotificationManager.error("Something Went Wrong!", "Error", 3000);
 
       return {
         props: {
