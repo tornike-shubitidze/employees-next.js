@@ -66,11 +66,11 @@ const employees = ({ employeesData }) => {
             >
               Remove Filter
             </li>
-            {employeesData.locations.map((location, i) => (
+            {employeesData.locations.map((location) => (
               <li
                 className="dropdown-item"
                 onClick={() => setLocationDropdown(location)}
-                key={i}
+                key={makeId()}
               >
                 {location.name}
               </li>
