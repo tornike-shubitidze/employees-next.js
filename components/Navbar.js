@@ -15,11 +15,9 @@ const Navbar = () => {
     { name: "Feedback", isActive: route.includes("feedback") },
   ]);
 
-  let setActive = (e) => {
+  let setActive = (value) => {
     let activeLink = navLinks.map((link) => {
-      link.name === e.target.textContent
-        ? (link.isActive = true)
-        : (link.isActive = false);
+      link.name === value ? (link.isActive = true) : (link.isActive = false);
       return link;
     });
 
@@ -30,7 +28,13 @@ const Navbar = () => {
     <div className="d-flex flex-row sticky-top p-3 px-md-5 bg-dark text-white justify-content-md-between justify-content-center">
       <Link href={"/"}>
         <a className="my-auto d-none d-md-block">
-          <img className="rounded" src="/logo.jpg" width={42} height={40} />
+          <img
+            className="rounded"
+            src="/logo.jpg"
+            width={42}
+            height={40}
+            onClick={() => setActive("Home")}
+          />
         </a>
       </Link>
 
@@ -51,7 +55,7 @@ const Navbar = () => {
                 className={`btn btn-${
                   link.isActive ? "primary" : "white"
                 } text-white me-3`}
-                onClick={(e) => setActive(e)}
+                onClick={(e) => setActive(e.target.textContent)}
               >
                 {link.name}
               </a>
