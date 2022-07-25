@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { URL } from "../../config";
+import { EMPLOYEES_URL, LOCATION_URL, JOB_URL } from "../../config";
+import Image from "next/image";
 import {
   NotificationManager,
   NotificationContainer,
@@ -17,7 +18,7 @@ const employeeById = ({ employeeData }) => {
   );
 
   let giveLike = () => {
-    fetch(URL + `/employee/${employeeData.employeeInfo.id}`, {
+    fetch(EMPLOYEES_URL + "/" + employeeData.employeeInfo.id, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ title: "Update Employee Like Amount" }),
@@ -32,8 +33,10 @@ const employeeById = ({ employeeData }) => {
   return (
     <div className="container d-flex justify-content-center my-5 col-lg-4">
       <div className="card bg-primary col-lg-9">
-        <img
-          src={`${URL + employeeData.employeeInfo.avatar}`}
+        <Image
+          height={450}
+          width={300}
+          src={`${employeeData.employeeInfo.avatar}`}
           className="card-img-top"
           alt="employee-avatar"
         />
@@ -85,7 +88,7 @@ const employeeById = ({ employeeData }) => {
 };
 
 export async function getStaticPaths() {
-  const res = await fetch(`${URL}/employee`);
+  const res = await fetch(EMPLOYEES_URL);
   const users = await res.json();
 
   const paths = users.map((user) => ({
@@ -97,9 +100,9 @@ export async function getStaticPaths() {
 
 export const getStaticProps = async ({ params }) => {
   return await Promise.all([
-    fetch(`${URL}/employee/${params.employeeById}`),
-    fetch(`${URL}/location`),
-    fetch(`${URL}/job`),
+    fetch(EMPLOYEES_URL + "/" + params.employeeById),
+    fetch(LOCATION_URL),
+    fetch(JOB_URL),
   ])
     .then(async ([employee, location, job]) => {
       const employeeInfo = await employee.json();

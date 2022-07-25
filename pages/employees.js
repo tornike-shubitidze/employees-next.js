@@ -1,5 +1,6 @@
-import { URL } from "../config";
+import { EMPLOYEES_URL, LOCATION_URL, JOB_URL } from "../config";
 import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
 import { makeId } from "../config";
 
@@ -131,8 +132,10 @@ const employees = ({ employeesData }) => {
                   }`}
                   key={employee.id}
                 >
-                  <img
-                    src={`${URL + employee.avatar}`}
+                  <Image
+                    height={400}
+                    width={400}
+                    src={`${employee.avatar}`}
                     className="card-img-top"
                     alt="employee-avatar"
                   />
@@ -160,9 +163,9 @@ const employees = ({ employeesData }) => {
 
 export const getStaticProps = async () => {
   return await Promise.all([
-    fetch(`${URL}/employee`),
-    fetch(`${URL}/location`),
-    fetch(`${URL}/job`),
+    fetch(EMPLOYEES_URL),
+    fetch(LOCATION_URL),
+    fetch(JOB_URL),
   ])
     .then(async ([employee, location, job]) => {
       const employees = await employee.json();

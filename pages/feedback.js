@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { URL } from "../config";
+import { FEEDBACK_URL } from "../config";
 import {
   NotificationManager,
   NotificationContainer,
@@ -13,7 +13,7 @@ const feedBack = () => {
   } = useForm();
 
   let onSubmit = (data) => {
-    fetch(`${URL}/feedback`, {
+    fetch(FEEDBACK_URL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
